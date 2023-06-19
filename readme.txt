@@ -1,11 +1,11 @@
-# AppDev - Nanotech 
+ AppDev - Nanotech 
 
-# Members:
+ Members:
   Malcolm Xavier L. Dizon (Leader)
   Diane Mae M. Corcino
   Benj Anne T. Mamales
 
-# Contributions:
+ Contributions:
   Dizon:
     A Brief History of Nanotechnology 
     
