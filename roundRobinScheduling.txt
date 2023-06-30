@@ -1,0 +1,51 @@
+   static void roundRobinScheduling(int[] process, int n, int[] bt, int[] at, int qtum) {
+        int wt[] = new int[n];
+        int tat[] = new int[n];
+        int total_wt = 0, total_tat = 0;
+
+        int rem_bt[] = new int[n];
+
+        for (int i = 0; i < n; i++)
+            rem_bt[i] = bt[i];
+
+        int ct = 0;
+        int completed = 0;
+        while (true) {
+            boolean done = true;
+            for (int i = 0; i < n; i++) {
+                if (rem_bt[i] > 0 && at[i] <= ct) {
+                    done = false;
+
+                    if (rem_bt[i] > qtum) {
+                        ct += qtum;
+                        rem_bt[i] -= qtum;
+                    } else {
+                        ct += rem_bt[i];
+                        wt[i] = ct - bt[i] - at[i];
+                        rem_bt[i] = 0;
+                        completed++;
+                    }
+                }
+            }
+
+            if (done && completed == n)
+                break;
+
+            if (done)
+                ct++;
+        }
+
+        for (int i = 0; i < n; i++)
+            tat[i] = bt[i] + wt[i];
+
+        System.out.println("PROCESS\tARRIVAL TIME\tBURST TIME\tWAITING TIME\tTURNAROUND TIME");
+
+        for (int i = 0; i < n; i++) {
+            total_wt += wt[i];
+            total_tat += tat[i];
+            System.out.println("p" + (i + 1) + "\t\t" + at[i] + "\t\t" + bt[i] + "\t\t" + wt[i] + "\t\t" + tat[i]);
+        }
+
+        System.out.println("AVERAGE OF WAITING TIME = " + ((float) total_wt / (float) n));
+        System.out.println("AVERAGE OF TURNAROUND TIME = " + ((float) total_tat / (float) n));
+    }
